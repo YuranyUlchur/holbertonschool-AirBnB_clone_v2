@@ -7,8 +7,18 @@ from sqlalchemy.orm import relationship
 from os import getenv
 
 table_associacion = Table("place_amenity", Base.metadata,
-                     Column("place_id", String(60), ForeignKey("places.id"), primary_key=True, nullable=False),
-                     Column("amenity_id", String(60), ForeignKey("amenities.id"), primary_key=True, nullable=False))
+                          Column(
+                            "place_id",
+                            String(60),
+                            ForeignKey("places.id"),
+                            primary_key=True,
+                            nullable=False),
+                          Column(
+                            "amenity_id",
+                            String(60),
+                            ForeignKey("amenities.id"),
+                            primary_key=True,
+                            nullable=False))
 
 
 class Place(BaseModel, Base):
@@ -50,14 +60,16 @@ class Place(BaseModel, Base):
 
     if storage == "db":
         reviews = relationship("Review", backref="place", cascade="delete")
-        amenities = relationship("Amenity", secondary="place_amenity", viewonly=False)
+        amenities = relationship("Amenity", secondary="place_amenity",
+                                 viewonly=False)
 
     if storage == "fs":
-        
+
         @property
         def reviews(self):
             """
-            This method returns a list of Review objects associated with the current Place object
+            This method returns a list of Review objects
+            associated with the current Place object
             """
             from models import storage
             review_list = []
@@ -69,7 +81,8 @@ class Place(BaseModel, Base):
         @property
         def amenities(self):
             """
-            This method returns a list of Amenity objects associated with the current Place object
+            This method returns a list of Amenity objects
+            associated with the current Place object
             """
             from models import storage
             amenity_list = []
@@ -81,7 +94,8 @@ class Place(BaseModel, Base):
         @amenities.setter
         def amenities(self, object):
             """
-            This method sets the value of the amenities attribute of the current Place object to the given object
+            This method sets the value of the amenities attribute
+            of the current Place object to the given object
             """
             if isinstance(object, Amenity):
                 self.amenity_ids.append(object.id)
