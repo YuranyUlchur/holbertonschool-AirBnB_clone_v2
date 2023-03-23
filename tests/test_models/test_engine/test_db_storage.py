@@ -1,3 +1,7 @@
+#!/usr/bin/python3
+"""
+Test validation the class TestDBStorage
+"""
 import unittest
 import os
 import tempfile
@@ -11,7 +15,7 @@ class TestDBStorage(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        """ """
+        """setting up a test environment for the class"""
         cls.db_fd, cls.db_path = tempfile.mkstemp()
         os.environ['HBNB_TYPE_STORAGE'] = 'db'
         storage._FileStorage__objects.clear()
@@ -38,7 +42,7 @@ class TestDBStorage(unittest.TestCase):
             storage._DBStorage__session.commit()
 
     def test_obj_list_empty(self):
-        """ 
+        """
         checks that the __objects dictionary of the
         FileStorage class instance is initially empty
         """
@@ -65,7 +69,7 @@ class TestDBStorage(unittest.TestCase):
         new.save()
         _id = new.to_dict()['id']
         self.assertIn(new.__class__.__name__ + '.' + _id,
-                        storage.all(type(new)).keys())
+                      storage.all(type(new)).keys())
 
     def test_storage_var_created(self):
         """verifies that an object of class"""
