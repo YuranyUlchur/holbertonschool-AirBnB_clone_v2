@@ -2,7 +2,7 @@
 """ """
 from tests.test_models.test_base_model import test_basemodel
 from models.city import City
-
+from models.state import State
 
 class test_City(test_basemodel):
     """Test Case"""
@@ -13,12 +13,9 @@ class test_City(test_basemodel):
         self.name = "City"
         self.value = City
 
-    def test_state_id(self):
-        """check if the type of the state_id attribute is a string."""
-        new = self.value()
+    def test_creation(self):
+        """verification"""
+        state = State(name="California")
+        new = self.value(state_id=state.id, name="San_Francisco")
         self.assertEqual(type(new.state_id), str)
-
-    def test_name(self):
-        """check if the type is a string"""
-        new = self.value()
         self.assertEqual(type(new.name), str)

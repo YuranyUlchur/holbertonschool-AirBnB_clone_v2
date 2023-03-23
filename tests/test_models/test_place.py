@@ -15,8 +15,8 @@ class test_Place(test_basemodel):
 
     def test_city_id(self):
         """check if the type is a string"""
-        new = self.value()
-        self.assertEqual(type(new.city_id), str)
+        self.assertEqual(type(self.place.city_id), str)
+        self.assertEqual(self.city.id, self.place.city_id)
 
     def test_user_id(self):
         """check if the type is a string"""
