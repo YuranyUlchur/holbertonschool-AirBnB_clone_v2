@@ -1,3 +1,7 @@
+#!/usr/bin/python3
+"""
+Test validation the class TestDBStorage
+"""
 import unittest
 import os
 import tempfile
@@ -11,7 +15,7 @@ class TestDBStorage(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        """ """
+        """setting up a test environment for the class"""
         cls.db_fd, cls.db_path = tempfile.mkstemp()
         os.environ['HBNB_TYPE_STORAGE'] = 'db'
         storage._FileStorage__objects.clear()
@@ -28,47 +32,46 @@ class TestDBStorage(unittest.TestCase):
 
     def setUp(self):
         """
-        initializes the database of the data storage
-        instance for the test by removing all objects of the State class
+        removes all objects in the base
         """
-        self.session = self.storage._DBStorage__session
-        self.session.query(State).delete()
-        self.session.commit()
+        del_list = []
+        for key in storage.all().keys():
+            del_list.append(key)
+        for key in del_list:
+            storage._DBStorage__session.delete(storage.all()[key])
+            storage._DBStorage__session.commit()
 
-    def tearDown(self):
+    def test_obj_list_empty(self):
         """
-        performs cleaning operations
+        checks that the __objects dictionary of the
+        FileStorage class instance is initially empty
         """
-        self.session.query(State).delete()
-        self.session.commit()
+        self.assertEqual(len(storage.all()), 0)
 
-    def test_objects(self):
+    def test_reload(self):
         """
-        checks the object type
+        checks if reload() of the FileStorage class works
+        correctly when the object storage file does not exist
         """
-        self.assertEqual(type(self.storage.all()), dict)
+        self.assertEqual(storage.reload(), None)
 
-    def test_storage(self):
+    def test_type_objects(self):
         """
-        verifica si un objeto creado a través de la clase State
+        confirm that the __objects attribute of an instance
+        of a class that uses a dictionary data storage system
+        (storage.all()) is of type dictionary.
         """
+        self.assertEqual(type(storage.all()), dict)
+
+    def test_store(self):
+        """checks that the object has been correctly saved in the database"""
         new = State(name="Florida")
         new.save()
         _id = new.to_dict()['id']
         self.assertIn(new.__class__.__name__ + '.' + _id,
-                        self.storage.all(type(new)).keys())
+                      storage.all(type(new)).keys())
 
-    def test_storage_created(self):
-        """
-        verifica si la instancia de almacenamiento de dato
-        en el sistema se crea correctamente como una
-        instancia de la clase DBStorage.
-        """
-        self.assertEqual(type(self.storage), DBStorage)
-    
-    def test_empty_database(self):
-        """
-        verifica si la instancia de almacenamiento
-        de datos en el sistema está vacía.
-        """
-        self.assertEqual(len(self.storage.all()), 0)
+    def test_storage_var_created(self):
+        """verifies that an object of class"""
+        from models.engine.db_storage import DBStorage
+        self.assertEqual(type(storage), DBStorage)
