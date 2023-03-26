@@ -42,7 +42,7 @@ class TestUser(unittest.TestCase):
         '''
             Test the type of name
         '''
-        new = User()
+        new = User(email="new@example.com")
         name = getattr(new, "email")
         self.assertIsInstance(name, str)
 
@@ -50,7 +50,7 @@ class TestUser(unittest.TestCase):
         '''
             Test the type of name
         '''
-        new = User()
+        new = User(first_name="Juan")
         name = getattr(new, "first_name")
         self.assertIsInstance(name, str)
 
@@ -58,7 +58,7 @@ class TestUser(unittest.TestCase):
         '''
             Test the type of last_name
         '''
-        new = User()
+        new = User(last_name="Camilo")
         name = getattr(new, "last_name")
         self.assertIsInstance(name, str)
 
@@ -66,6 +66,6 @@ class TestUser(unittest.TestCase):
         '''
             Test the type of password
         '''
-        new = User()
+        new = User(password="1234")
         name = getattr(new, "password")
         self.assertIsInstance(name, str)

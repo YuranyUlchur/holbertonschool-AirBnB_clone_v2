@@ -15,7 +15,17 @@ class TestPlace(unittest.TestCase):
 
     def setUp(self):
         """Creates an instance for place"""
-        self.new_place = Place()
+        self.new_place = Place(
+            city_id="4b457e66-c7c8-4f63-910f-fd91c3b7140b",
+            user_id="4f3f4b42-a4c3-4c20-a492-efff10d00c0b",
+            name="Lovely_place",
+            number_rooms=3,
+            number_bathrooms=1,
+            max_guest=6,
+            price_by_night=120,
+            latitude=37.773972,
+            longitude=-122.431297,
+            description="New Place")
 
     def TearDown(self):
         pass

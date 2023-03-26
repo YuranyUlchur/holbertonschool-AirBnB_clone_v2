@@ -37,7 +37,7 @@ class TestReview(unittest.TestCase):
         Test that Review class has place_id, user_id and text
         attributes.
         """
-        new_review = Review()
+        new_review = Review(place_id="dojndnniodw13244", user_id="kwndw71902", text="dojndnniodw13244")
         place_id = getattr(new_review, "place_id")
         user_id = getattr(new_review, "user_id")
         text = getattr(new_review, "text")
