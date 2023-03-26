@@ -53,8 +53,8 @@ class TestHBNBCommand(unittest.TestCase):
 
     def test_do_destroy(self):
         with patch('sys.stdout', new=io.StringIO()) as f:
-                self.cli.onecmd("create Place")
-                id_ = f.getvalue().strip()
+            self.cli.onecmd("create Place")
+            id_ = f.getvalue().strip()
 
         with patch('sys.stdout', new=io.StringIO()) as f:
             self.cli.onecmd("destroy")
@@ -92,7 +92,6 @@ class TestHBNBCommand(unittest.TestCase):
 
         self.assertIn("", output)
 
-
     def test_do_count(self):
         with patch('sys.stdout', new=io.StringIO()) as f:
             self.cli.onecmd("create BaseModel")
@@ -110,4 +109,3 @@ class TestHBNBCommand(unittest.TestCase):
 
         self.cli.onecmd(f"destroy BaseModel {id_}")
         self.cli.onecmd(f"destroy BaseModel {new_id}")
-
