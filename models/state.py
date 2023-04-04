@@ -36,3 +36,5 @@ class State(BaseModel, Base):
             return city_list
     if storage == 'db':
         cities = relationship('City', backref='state', cascade='all, delete')
+    
+    
