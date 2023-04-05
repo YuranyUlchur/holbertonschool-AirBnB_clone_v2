@@ -31,10 +31,8 @@ class State(BaseModel, Base):
             from models import storage
             city_list = []
             for city in list(storage.all().values()):
-                if city.state_id == self.id:
+                if  self.id == city.state_id:
                     city_list.append(city)
             return city_list
     if storage == 'db':
         cities = relationship('City', backref='state', cascade='all, delete')
-    
-    
