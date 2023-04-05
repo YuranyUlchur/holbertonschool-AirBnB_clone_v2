@@ -9,6 +9,7 @@ from models.state import State
 
 app = Flask(__name__)
 
+
 @app.teardown_appcontext
 def teardown_context(self):
     storage.close()
@@ -22,4 +23,3 @@ def states_cities():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
-
