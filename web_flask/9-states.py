@@ -9,6 +9,7 @@ from models.state import State
 
 app = Flask(__name__)
 
+
 @app.teardown_appcontext
 def teardown_context(self):
     storage.close()
@@ -24,9 +25,9 @@ def states():
 def states_id():
     states = storage.all(State)
     if states.id == id:
-            return render_template('9-states.html', state=states, states="id")
+        return render_template('9-states.html', state=states)
     else:
-        return render_template('9-states.html', states=states, states="not")
+        return render_template('9-states.html', states=states)
 
 
 if __name__ == '__main__':

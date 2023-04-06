@@ -5,7 +5,7 @@
     <TITLE>HBNB</TITLE>
 </HEAD>
 <BODY>
-    {% if state %}
+    {% if states %}
         <H1>State</H1>
             <UL>
                 {% for i in states.values()|sort(attribute='name') %}
@@ -13,7 +13,7 @@
                 {% endfor %}
             </UL>
 
-    {% if state == state.id%}
+    {% elif state == state.id%}
         <H1>State</H1>
         <H3>Cities</H3>
             <UL>
