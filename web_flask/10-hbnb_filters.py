@@ -5,6 +5,8 @@ script that starts a Flask web application with an route /hbnb
 from flask import Flask, render_template
 from models import storage
 from models.state import State
+from models.city import City
+from models.amenity import Amenity
 
 
 app = Flask(__name__)
@@ -15,20 +17,14 @@ def teardown_context(self):
     storage.close()
 
 
-@app.route('/states', strict_slashes=False)
-def states():
-    states = storage.all(State)
-    return render_template('9-states.html', states=states)
+@app.route('/hbnb_filters', strict_slashes=False)
+def hbnb_filters():
+    states = storage.all(State).values()
+    cities = storage.all(City).values()
+    amenities = storage.all(Amenity).values()
 
-
-@app.route('/states/<id>', strict_slashes=False)
-def states_id():
-    states = storage.all(State)
-    if states.id == id:
-        return render_template('9-states.html', state=states)
-    else:
-        return render_template('9-states.html', states=states)
-
+    return render_template('10-hbnb_filters.html',
+                           states=states, cities=cities, amenities=amenities)
 
 
 if __name__ == '__main__':
