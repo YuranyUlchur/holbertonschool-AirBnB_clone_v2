@@ -18,16 +18,17 @@ def teardown_context(self):
 @app.route('/states', strict_slashes=False)
 def states():
     states = storage.all(State)
-    return render_template('10-hbnb_filters.html', states=states)
+    return render_template('9-states.html', states=states)
 
 
 @app.route('/states/<id>', strict_slashes=False)
 def states_id():
     states = storage.all(State)
     if states.id == id:
-        return render_template('10-hbnb_filters.html', state=states)
+        return render_template('9-states.html', state=states)
     else:
-        return render_template('10-hbnb_filters.html', states=states)
+        return render_template('9-states.html', states=states)
+
 
 
 if __name__ == '__main__':

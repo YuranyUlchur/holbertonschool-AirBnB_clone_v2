@@ -22,12 +22,13 @@ def states():
 
 
 @app.route('/states/<id>', strict_slashes=False)
-def states_id():
-    states = storage.all(State)
-    if states.id == id:
-        return render_template('9-states.html', state=states)
+def states_id(id):
+    data = storage.all(State)
+    for state in data.values():
+        if state.id == id:
+            return render_template('9-states.html', state=states, mode="id")
     else:
-        return render_template('9-states.html', states=states)
+        return render_template('9-states.html', states=data,  mode="not")
 
 
 if __name__ == '__main__':
