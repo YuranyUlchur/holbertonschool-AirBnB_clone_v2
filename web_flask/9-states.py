@@ -27,7 +27,7 @@ def teardown_func(self):
 @app.route('/states', strict_slashes=False)
 def states():
     data = storage.all(State)
-    return render_template('9-states.html', states=data, mode="none")
+    return render_template('9-states.html', states=data)
 
 
 @app.route('/states/<id>', strict_slashes=False)
