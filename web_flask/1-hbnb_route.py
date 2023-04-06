@@ -5,16 +5,19 @@ script that starts a Flask web application with an route
 from flask import Flask
 
 
+"""instance creation"""
 app = Flask(__name__)
 
 
 @app.route('/', strict_slashes=False)
 def hello():
+    """creation the route"""
     return "Hello HBNB!"
 
 
 @app.route('/hbnb', strict_slashes=False)
 def hbnb():
+    """creation the route"""
     return "HBNB"
 
 

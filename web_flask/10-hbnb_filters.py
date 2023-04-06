@@ -10,15 +10,23 @@ from models.amenity import Amenity
 
 
 app = Flask(__name__)
+"""instance creation"""
 
 
 @app.teardown_appcontext
 def teardown_context(self):
+    """
+    Call in this method
+    """
     storage.close()
 
 
 @app.route('/hbnb_filters', strict_slashes=False)
 def hbnb_filters():
+    """
+    It handles the /hbnb_filters
+    path and displays the filters page.
+    """
     states = storage.all(State).values()
     cities = storage.all(City).values()
     amenities = storage.all(Amenity).values()

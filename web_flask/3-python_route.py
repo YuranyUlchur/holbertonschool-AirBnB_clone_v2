@@ -5,27 +5,35 @@ script that starts a Flask web application with an route
 from flask import Flask
 
 
+"""instance creation"""
 app = Flask(__name__)
 
 
 @app.route('/', strict_slashes=False)
 def hello():
+    """creation the route"""
     return "Hello HBNB!"
 
 
 @app.route('/hbnb', strict_slashes=False)
 def hbnb():
+    """creation the route"""
     return "HBNB"
 
 
 @app.route('/c/<text>', strict_slashes=False)
 def c(text):
+    """text value is replaced by _ with a blank space."""
     return 'C %s' % text.replace('_', ' ')
 
 
 @app.route('/python/', defaults={'text': 'is cool'}, strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False, )
 def python(text):
+    """
+    Takes a text parameter from the URL
+    but if not provided, the default value is is_cool
+    """
     return 'Python %s' % text.replace('_', ' ')
 
 

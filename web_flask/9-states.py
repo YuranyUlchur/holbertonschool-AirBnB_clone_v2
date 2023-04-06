@@ -9,6 +9,7 @@ from flask import render_template
 from models import storage
 from models.state import State
 
+"""instance creation"""
 app = Flask(__name__)
 """
 add option where URLs with and without
@@ -19,17 +20,24 @@ app.url_map.strict_slashes = False
 
 @app.teardown_appcontext
 def teardown_func(self):
+    """
+    Call in this method
+    """
     storage.close()
 
 
 @app.route('/states', strict_slashes=False)
 def states():
+    """handles HTTP requests to the path /states"""
     data = storage.all(State)
     return render_template('9-states.html', states=data, mode="none")
 
 
 @app.route('/states/<id>', strict_slashes=False)
 def states_id(id):
+    """
+    id is a path parameter that represents the ID of a specific state
+    """
     data = storage.all(State)
     for state in data.values():
         if state.id == id:
